@@ -1,18 +1,26 @@
-import {productsSeed} from "../data/products.js";
-
+import { getCategories, filterByCategory } from "../services/products.service.js"
 
 export function renderProductsPage(root){
+    const categories = getCategories()
     root.innerHTML = `
-    <h1>Products</h1>
-    <p>Esta es la pagina Products</p>
-    <ul id="products-list"></ul>
-  `;
+        <h2>Productos</h2>
+        <select id="cat">
+         ${categories.map((c)=>`<option value="${c}">${c}</option>`)}
+        </select>
+        <div id="list" style="margin-top:12px;"></div>
+    `;
+    const list = root.querySelector("#list")
+    const select = root.querySelector("#cat")
 
-  const ul = root.querySelector("#products-list");
+    function draw(category) {
+        const items = filterByCategory(category);
+        list.innerHTML = `
+        <ul>
+            ${items.map((p)=> `<li>${p.name} - ${p.category} -vendidos: ${p.sold}</li>`).join("")}
+        </ul>
+        `
 
-  productsSeed.forEach(p => {
-    const li = document.createElement("li");
-    li.textContent = p.name;
-    ul.appendChild(li);
-  });
+    }
+   draw("Todos")
+   select.addEventListener("change", (e)=> draw(e.target.value))
 }

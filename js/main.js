@@ -1,9 +1,10 @@
 import {Router} from "./router.js";
+import { initProducts } from "./services/products.service.js";
 
 const app = document.getElementById("app");
 const router = new Router(app)
 
-router.navigate("dashboard");
+initProducts()
 
 //todo function to mark as active in the sidebar
 function setActive(page) { //dashboard
