@@ -5,17 +5,20 @@ const router = new Router(app)
 
 router.navigate("dashboard");
 
+//todo function to mark as active in the sidebar
+function setActive(page) { //dashboard
+    document.querySelectorAll(".menu-item").forEach((btn)=>{
+        btn.classList.toggle("active", btn.dataset.page===page)
+    })
+} 
 
+//todo function to navigate when we click on the sidebar
+document.querySelectorAll(".menu-item").forEach(btn=>{
+        btn.addEventListener("click",()=>{
+            const page = btn.dataset.page //dashboard
+            router.navigate(page)
+            setActive(page)
+        })
+})
 
-document.getElementById("dash-btn").addEventListener("click",()=>{
-    router.navigate("dashboard")
-});
-
-document.getElementById("prod-btn").addEventListener("click",()=>{
-    router.navigate("products")
-});
-
-document.getElementById("about-btn").addEventListener("click",()=>{
-    router.navigate("about")
-});
-
+router.navigate("dashboard")
