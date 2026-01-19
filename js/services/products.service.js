@@ -57,3 +57,13 @@ export function getTopSold(limit = 5){
     .sort((a,b) => (b.sold ?? 0)-(a.sold ?? 0))
     .slice(0,limit)
 }
+
+export function generateProductId() {
+    return "p-"+Date.now().toString().slice(-6)
+}
+
+export function isDuplicateName(name) {
+    const products = getAllProducts()
+    const normalized = name.trim().toLowerCase();
+    return products.some((p)=>p.name.trim().toLowerCase() === normalized)
+}
