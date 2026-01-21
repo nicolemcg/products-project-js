@@ -6,40 +6,42 @@ export function renderProductsPage(root) {
     root.innerHTML = `
    <h2>Productos</h2>
     <!-- FORM: AGREGAR -->
-     <div style="border:1px solid #ddd; padding: 12px; border-radius: 10px;margin-bottom: 14px;">
+    <div style="border:3px solid #f4eaff; padding: 12px; border-radius: 10px;margin-bottom: 14px;">
         <h3 id="formTitle" style="margin: 0 0 10px 0;">Agregar Producto</h3>
         <div style="display: grid; grid-template-columns:1fr 1fr; gap: 10px;">
             <div>
-                <label for="">Nombre</label>
-                <input id="pName" type="text" placeholder="Ej: Teclado mecánico" style="width: 100%;padding: 8px;">
+                <label class="form-label" for="">Nombre</label>
+                <input id="pName" class="form-control" type="text" placeholder="Ej: Teclado mecánico" style="width: 100%;padding: 8px;">
             </div>    
             <div>
-                <label for="">Categoria</label>
-                <input id="pCategory" type="text" placeholder="Ej: Perifericos" style="width: 100%;padding: 8px;">
+                <label class="form-label" for="">Categoria</label>
+                <input id="pCategory" class="form-control" type="text" placeholder="Ej: Perifericos" style="width: 100%;padding: 8px;">
             </div>    
             <div>
-                <label for="">Precio (Bs)</label>
-                <input id="pPrice" type="number" min="0" placeholder="Ej: 450" style="width: 100%;padding: 8px;">
+                <label class="form-label" for="">Precio (Bs)</label>
+                <input id="pPrice" class="form-control" type="number" min="0" placeholder="Ej: 450" style="width: 100%;padding: 8px;">
             </div>    
             <div>
-                <label for="">Stock</label>
-                <input id="pStock" type="number" min="0" placeholder="Ej: 12" style="width: 100%;padding: 8px;">
+                <label class="form-label" for="">Stock</label>
+                <input id="pStock" class="form-control" type="number" min="0" placeholder="Ej: 12" style="width: 100%;padding: 8px;">
             </div>    
         </div>
         <div style="margin-top: 10px; display: flex;gap: 10px; align-items: center;">
-            <button id="btnPrimary" style="padding: 10px 12px; cursor: pointer;" >Agregar</button>
-            <button id="btnCancel" style="padding: 10px 12px; cursor: pointer;" display:none >Cancelar</button>
+            <button id="btnPrimary" class="btn btn-primary" style="padding: 10px 12px; cursor: pointer;" >Agregar</button>
+            <button id="btnCancel" class="btn btn-secondary" style="padding: 10px 12px; cursor: pointer;" display:none >Cancelar</button>
             <small id="msg" style="opacity:.8;"></small>
 
         </div>
-     </div>
-     <!-- FILTRO -->
-      <div style="margin-bottom: 10px;">
-        <label for="">Filtrar por categoria:</label>
-        <select id="cat">
-           ${categories.map((c) => `<option value="${c}">${c}</option>`).join("")}
-        </select>
-        <span id="debug" style="margin-left: 10px; font-size: 12px; opacity: .7;"></span>
+    </div>
+    <!-- FILTRO -->
+        <div style="margin-bottom: 10px; display: flex;">
+        <div style="flex: 0 0 60%;">
+            <label class="form-label" for="">Filtrar por categoria:</label>
+            <select class="form-select" id="cat">
+            ${categories.map((c) => `<option value="${c}">${c}</option>`).join("")}
+            </select>
+        </div>
+        <span id="debug" style="margin-left: 10px; margin-top: 36px; font-size: 14px; opacity: .7;"></span>
       </div>
     <!-- LIST -->
      <div id="list"></div>
@@ -122,7 +124,7 @@ export function renderProductsPage(root) {
             return
         }
         list.innerHTML = `
-            <table border="1" cellpading="8" cellspacing = "0" style = "border-collapse:collapse; width:100%">
+            <table class="table" border="1" cellpading="8" cellspacing = "0" style = "border-collapse:collapse; width:100%">
                 <thead>
                     <tr>
                         <th>Nombre</th>
@@ -143,8 +145,8 @@ export function renderProductsPage(root) {
                             <td>${p.stock}</td>
                             <td>${p.sold ?? 0}</td>
                             <td>
-                            <button class="btnEdit" data-id="${p.id}" style="cursor: pointer;">Editar</button>
-                                <button class="btnDelete" data-id="${p.id}" style="cursor: pointer;">Eliminar</button>
+                            <button class="btnEdit btn btn-primary btn-sm" data-id="${p.id}" style="cursor: pointer;">Editar</button>
+                            <button class="btnDelete btn btn-secondary btn-sm" data-id="${p.id}" style="cursor: pointer;">Eliminar</button>
 
                             </td>
                         </tr>
@@ -236,7 +238,7 @@ export function renderProductsPage(root) {
     }) 
 
     //cancel edition
-    btnCancel.addEventListener("change",()=>{
+    btnCancel.addEventListener("click",()=>{
         clearMessage()
         setFormModeAdd()
     })

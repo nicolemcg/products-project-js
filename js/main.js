@@ -9,7 +9,7 @@ initProducts()
 //todo function to mark as active in the sidebar
 function setActive(page) { //dashboard
     document.querySelectorAll(".menu-item").forEach((btn)=>{
-        btn.classList.toggle("active", btn.dataset.page===page)
+        btn.classList.toggle("menu-item-active", btn.dataset.page===page)
     })
 } 
 
