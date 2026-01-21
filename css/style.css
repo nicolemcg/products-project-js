@@ -8,22 +8,24 @@ body{
 }
 
 .layout {
-    /* border: 10px solid rgb(125, 235, 169); */
     display:flex;
     min-height: 100vh; /*minimus height window*/
 }
 
 .sidebar {
     width: 220px;
-    border: 1px solid rgb(188, 203, 201);
+    border: 1px solid #ccc;
     border-right: 1px solid #ddd;
     background-color: #f7f7f7;
 }
 
 .brand {
     font-weight: bold;
-    border: 2px solid rgb(207, 202, 248);
-    margin-bottom: 16px;
+    background-color:#FFF3CC;
+    height: 30px;
+    text-align: center;
+    height: 40px;
+    line-height: 40px;
 }
 
 .menu {
@@ -39,24 +41,19 @@ body{
     text-align: left;
     padding: 10px 12px;
     border-radius:  8px;
-    background:rgb(153, 191, 247);
+    background-color: #99BFF7;
+    color: #333;
 
 }
 
 .menu-item:hover {
-    background-color: #ccc;
+    background-color: #D6D4FF;
     border-radius:  8px;
 }
 
-/* .menu-item:active{
-    background-color: #e8e8e8;
-    border-color: rgb(214, 213, 213);
-    border-radius:  8px;
-} */
-
 .menu-item-active{
-    background-color: #ccc;/* #e8e8e8;*/
-    border-color: rgb(214, 213, 213);
+    background-color: #E8E8E8;
+    border-color: #ccc;
     border-radius:  8px;
 }
 
@@ -75,5 +72,37 @@ body{
     border: 1px solid #ddd;
     padding: 18px;
     border-radius: 10px;
-    background: rgb(213, 213, 244);
+    background: #F4F6FB;
+}
+
+.boxFormProduct {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+.productFormContainer {
+    border:3px solid #E2E6F0; 
+    padding: 12px; 
+    border-radius: 15px; 
+    margin-bottom: 14px;
+    width: 80%;
+    background-color: #FFFFFF;
+}
+
+.btnShowAddProduct {
+    width: 30%;
+}
+
+.containerList{
+    background-color: #FFFFFF;
+    padding: 14px;
+    border-radius: 15px;
+    border:3px solid #E2E6F0; 
+    margin: 6px;
+}
+
+.hidden {
+  display: none;
 }
