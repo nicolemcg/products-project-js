@@ -67,3 +67,13 @@ export function isDuplicateName(name) {
     const normalized = name.trim().toLowerCase();
     return products.some((p)=>p.name.trim().toLowerCase() === normalized)
 }
+
+export function addSale(id) {
+    const products = getAllProducts();
+    const idx = products.findIndex(p=> p.id === id)
+    if(idx === -1) return null
+
+    products[idx].sold = (products[idx].sold ?? 0) + 1;
+    writeJSON(KEY,products)
+    return products[idx]
+}
