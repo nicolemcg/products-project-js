@@ -52,12 +52,6 @@ export function filterByCategory(category){
     return products.filter(p=> p.category === category)
 }
 
-export function getTopSold(limit = 5){
-    return [...getAllProducts()]
-    .sort((a,b) => (b.sold ?? 0)-(a.sold ?? 0))
-    .slice(0,limit)
-}
-
 export function generateProductId() {
     return "p-"+Date.now().toString().slice(-6)
 }
@@ -76,4 +70,30 @@ export function addSale(id) {
     products[idx].sold = (products[idx].sold ?? 0) + 1;
     writeJSON(KEY,products)
     return products[idx]
+}
+
+export function getTopSold(limit = 5) {
+    return [...getAllProducts()]
+        .sort((a, b) => (b.sold ?? 0) - (a.sold ?? 0))
+        .slice(0, limit)
+}
+
+export function getTotalProducts() {
+    return getAllProducts().length;
+}
+
+export function getTotalSales() {
+    return getAllProducts().reduce((acc, p) => acc + (p.sold ?? 0), 0)
+}
+
+export function getBestSeller() {
+    const products = getAllProducts();
+
+    if (products.length == 0) return null;
+
+    return products.reduce((best, p) => {
+        const bestSold = best.sold ?? 0
+        const currSold = p.sold ?? 0
+        return currSold > bestSold ? p : best
+    }, products[0])
 }
