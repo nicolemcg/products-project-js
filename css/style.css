@@ -47,7 +47,7 @@ body{
 }
 
 .menu-item:hover {
-    background-color: #D6D4FF;
+    background-color: #d6edfe;
     border-radius:  8px;
 }
 
@@ -105,4 +105,39 @@ body{
 
 .hidden {
   display: none;
+}
+
+.dashboardContainerTotals {
+    display:grid; 
+    grid-template-columns: repeat(3,1fr); 
+    gap: 12px; 
+    margin-bottom:14px;
+}
+
+.dashboardBoxsContainer {
+    border:1px solid #ddd; 
+    padding: 12px; 
+    border-radius:10px; 
+    background-color: #FFFFFF; 
+    border:3px solid #E2E6F0;
+}
+
+.dashboardLabelBoxsContainer {
+    opacity: .7; 
+    font-size: 12px;
+}
+
+.dashboardTextBoxsContainer {
+    font-size: 12px; 
+    font-weight: bold;
+}
+
+.dashboardTopTittleBox {
+    margin: 0  0 10px 0;
+}
+
+.dashboardTopBox {
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 12px;
 }
