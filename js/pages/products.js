@@ -2,7 +2,7 @@ import { getCategories, filterByCategory, getAllProducts, deleteProduct, isDupli
 
 export function renderProductsPage(root) {
     const categories = getCategories()
-    console.log(categories)
+
     root.innerHTML = `
    <h2>Productos</h2>
     <!-- FORM: AGREGAR -->
@@ -70,9 +70,9 @@ export function renderProductsPage(root) {
     const productForm = root.querySelector("#productForm");
 
     //estado de edicion
-    let editingId = null // si es null => modo agregar
+    let editingId = null // if it is null -> change to add mode
 
-    btnAddProduct.addEventListener("click", () => { console.log("click agregar")
+    btnAddProduct.addEventListener("click", () => {
         productForm.classList.toggle("hidden");
         clearForm();
     });
@@ -183,12 +183,15 @@ export function renderProductsPage(root) {
         })
 
         //Eliminar 
-        root.querySelectorAll(".btnDelete").forEach(btn => {
+        root.querySelectorAll(".btnDelete").forEach(btn => { 
             btn.addEventListener("click", () => {
                 clearMessage()
                 const id = btn.dataset.id;
                 const ok = confirm("Seguro que deseas eliminar este producto?")
                 if (!ok) return
+
+                if(editingId === id) setFormModeAdd()
+
                 const removed = deleteProduct(id)
                 if (removed) {
                     setMessage("Producto eliminado 👌")
