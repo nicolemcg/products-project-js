@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Productos</h2>
+    <!-- FORM: AGREGAR -->
+     <div style="border:1px solid #ddd; padding: 12px; border-radius: 10px;margin-bottom: 14px;">
+        <h3 style="margin: 0 0 10px 0;">Agregar Producto</h3>
+        <div style="display: grid; grid-template-columns:1fr 1fr; gap: 10px; border:1px solid red">
+            <div>
+                <label for="">Nombre</label>
+                <input id="pName" type="text" placeholder="Ej: Teclado mecánico" style="width: 100%;padding: 8px;">
+            </div>    
+            <div>
+                <label for="">Categoria</label>
+                <input id="pCategory" type="text" placeholder="Ej: Perifericos" style="width: 100%;padding: 8px;">
+            </div>    
+            <div>
+                <label for="">Precio (Bs)</label>
+                <input id="pPrice" type="number" min="0" placeholder="Ej: 450" style="width: 100%;padding: 8px;">
+            </div>    
+            <div>
+                <label for="">Stock</label>
+                <input id="pStock" type="number" min="0" placeholder="Ej: 12" style="width: 100%;padding: 8px;">
+            </div>    
+        </div>
+        <div style="margin-top: 10px; display: flex;gap: 10px; align-items: center;">
+            <button id="btnAdd" style="padding: 10px 12px; cursor: pointer;" >Agregar</button>
+            <small id="msg" style="opacity:.8;"></small>
+
+        </div>
+     </div>
+     <!-- FILTRO -->
+      <div style="margin-bottom: 10px;">
+        <label for="">Filtrar por categoria:</label>
+        <select id="cat">
+           ${categories.map((c) => `<option value="${c}">${c}</option>`).join("")}
+        </select>
+        <span id="debug" style="margin-left: 10px; font-size: 12px; opacity: .7;"></span>
+      </div>
+    <!-- LIST -->
+     <div id="list"></div>
+
+     <table border="1" cellpading="8" cellspacing = "0" style = "border-collapse:collapse; width:100%">
+            <thead>
+                 <tr>
+                    <th>Nombre</th>
+                    <th>Categoria</th>
+                    <th>Precio</th>
+                    <th>Stock</th>
+                    <th>Vendidos</th>
+                    <th>Acciones</th>
+                 </tr>   
+            </thead>
+            <tbody>
+                ${items.map(
+                    (p)=>`
+                    <tr>
+                        <td>${p.name}</td>
+                        <td>${p.category}</td>
+                        <td>${p.price}</td>
+                        <td>${p.stock}</td>
+                        <td>${p.sold ?? 0}</td>
+                        <td>
+                            <button class="btnDelete" data-id="${p.id}" style="cursor: pointer;">Eliminar</button>
+                        </td>
+                    </tr>
+                    `
+                ).join("")}
+            </tbody>
+    </table>
+
+</body>
+</html>
