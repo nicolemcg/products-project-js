@@ -1,4 +1,4 @@
-import { getCategories, filterByCategory, getAllProducts, deleteProduct, isDuplicateName, generateProductId, addProduct, getProductById, updateProduct } from "../services/products.service.js"
+import { getCategories, filterByCategory, getAllProducts, deleteProduct, isDuplicateName, generateProductId, addProduct, getProductById, updateProduct, addSale } from "../services/products.service.js"
 
 export function renderProductsPage(root) {
     const categories = getCategories()
@@ -156,10 +156,10 @@ export function renderProductsPage(root) {
                             <td>${p.price}</td>
                             <td>${p.stock}</td>
                             <td>${p.sold ?? 0}</td>
-                            <td>
-                            <button class="btnEdit btn btn-primary btn-sm" data-id="${p.id}" style="cursor: pointer;">Editar</button>
-                            <button class="btnDelete btn btn-secondary btn-sm" data-id="${p.id}" style="cursor: pointer;">Eliminar</button>
-
+                            <td style = "display:flex; gap:8px; justify-content: center;">
+                                <button class="btnSale btn btn-info" data-id="${p.id}" style="cursor: pointer;">+1 venta</button>
+                                <button class="btnEdit btn btn-primary btn-sm" data-id="${p.id}" style="cursor: pointer;">Editar</button>
+                                <button class="btnDelete btn btn-secondary btn-sm" data-id="${p.id}" style="cursor: pointer;">Eliminar</button>
                             </td>
                         </tr>
                         `
@@ -167,6 +167,22 @@ export function renderProductsPage(root) {
                 </tbody>
             </table>
         `;
+
+        // +1 sale
+        root.querySelectorAll(".btnSale").forEach((btn)=>{
+            btn.addEventListener("click",()=>{
+                clearMessage();
+                const id = btn.dataset.id;
+                const updated = addSale(id)
+                if(!updated){
+                    setMessage("No se pudo registrar la venta", true)
+                    return
+                }
+                setMessage("Venta registrada 👌")
+                draw(select.value)
+            })
+        })
+
         // Editar
         root.querySelectorAll(".btnEdit").forEach((btn) => {
             btn.addEventListener("click", () => {
@@ -183,14 +199,14 @@ export function renderProductsPage(root) {
         })
 
         //Eliminar 
-        root.querySelectorAll(".btnDelete").forEach(btn => { 
+        root.querySelectorAll(".btnDelete").forEach(btn => {
             btn.addEventListener("click", () => {
                 clearMessage()
                 const id = btn.dataset.id;
                 const ok = confirm("Seguro que deseas eliminar este producto?")
                 if (!ok) return
 
-                if(editingId === id) setFormModeAdd()
+                if (editingId === id) setFormModeAdd()
 
                 const removed = deleteProduct(id)
                 if (removed) {
@@ -257,7 +273,7 @@ export function renderProductsPage(root) {
     btnCancel.addEventListener("click", () => {
         clearMessage()
         setFormModeAdd()
-        productForm.classList.add("hidden"); 
+        productForm.classList.add("hidden");
     })
 
     //filtro

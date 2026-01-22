@@ -7,7 +7,7 @@ const router = new Router(app)
 initProducts()
 
 //todo function to mark as active in the sidebar
-function setActive(page) { //dashboard
+function setActive(page) {
     document.querySelectorAll(".menu-item").forEach((btn)=>{
         btn.classList.toggle("menu-item-active", btn.dataset.page===page)
     })
@@ -16,10 +16,11 @@ function setActive(page) { //dashboard
 //todo function to navigate when we click on the sidebar
 document.querySelectorAll(".menu-item").forEach(btn=>{
         btn.addEventListener("click",()=>{
-            const page = btn.dataset.page //dashboard
+            const page = btn.dataset.page
             router.navigate(page)
             setActive(page)
         })
 })
 
 router.navigate("dashboard")
+setActive("dashboard")
