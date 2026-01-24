@@ -27,7 +27,11 @@ export function renderDashboardPage(root) {
             </div>
             <div class="dashboardBoxsContainer">
                 <div class="dashboardLabelBoxsContainer"> Más vendidos</div>
-                <div class="dashboardTextBoxsContainer">${bestSeller ? `Vendidos : ${bestSeller.sold ?? 0}` : ""} 
+                <div class="dashboardTextBoxsContainer">
+                ${bestSeller ? `
+                    <span style="font-weight: normal;">Producto: </span> <span>${bestSeller.name}</span><br>
+                    <span style="font-weight: normal;">Cantidad: </span> <span>${bestSeller.sold ?? 0}</span>
+                    ` : ""} 
                 </div>
             </div>
         </div>
