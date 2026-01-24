@@ -10,7 +10,13 @@ export function initProducts() {
 }
 
 export function getAllProducts() {
-    return readJSON(KEY, [])
+   const products = readJSON(KEY, [])
+
+    return products.sort((a, b) => {
+        const idA = Number(a.id.split("-")[1])
+        const idB = Number(b.id.split("-")[1])
+        return idB - idA
+    })
 }
 
 export function getProductById(id){

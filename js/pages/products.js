@@ -242,7 +242,7 @@ export function renderProductsPage(root) {
                 createdAt: new Date().toISOString().slice(0, 10)
             }
             addProduct(newProduct)
-            setMessage("Producto agrgado 👌")
+            setMessage("Producto agregado 👌")
             clearForm()
             draw(select.value)
             return
